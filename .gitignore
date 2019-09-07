@@ -1,1 +1,4 @@
 .env
+*.log
+*.ipynb_checkpoints
+__pycache__
