@@ -14,11 +14,11 @@ def getHtml(date, station):
     select = Select(driver.find_element_by_name('Provincia'))
     select.select_by_value('MADRID')
     select = Select(driver.find_element_by_name('id_hija'))
-    select.select_by_value('3195')
+    select.select_by_value(station)
 
-    element = driver.find_element_by_name("Iday").send_keys(date[8:])
-    element = driver.find_element_by_name("Imonth").send_keys(date[5:7])
-    element = driver.find_element_by_name("Iyear").send_keys(date[:4])
+    element = driver.find_element_by_name("Iday").send_keys(date.day)
+    element = driver.find_element_by_name("Imonth").send_keys(date.month)
+    element = driver.find_element_by_name("Iyear").send_keys(date.year)
     
     driver.find_elements_by_xpath("/html/body/div[3]/div[2]/div[1]/div/form/input[5]")[0].click()
     html = driver.page_source
@@ -38,6 +38,10 @@ def scrapHtml(html):
     
 
 def getWeather(date, station):
+    print("Accediendo a la pagina...")
     html=getHtml(date, station)
+    print("Se ha accedido a la pagina")
+    print("Scrapeando el tiempo...")
     info=scrapHtml(html)
+    print("Tiempo scrapeado")
     return info
