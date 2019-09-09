@@ -5,6 +5,7 @@ from email.mime.text import MIMEText
 import smtplib
 
 def sendMail(password,origin,destination,date):
+    print("Mail de destino"+destination[0] )
     server=conectToserver(password,origin)
     sender(origin,destination,date,server)
 
@@ -24,8 +25,8 @@ def conectToserver(password,mail):
 def sender(origin,destination,date,server):
 
 
-    subject = "An email with attachment from Python"
-    body = "This is an email with attachment sent from Python"
+    subject = "Analisis de contaminacion"
+    body = "Se adjunta el informe de contaminacion"
 
 
     # Create a multipart message and set headers
@@ -60,4 +61,5 @@ def sender(origin,destination,date,server):
     message.attach(part)
     text = message.as_string()
     server.sendmail(origin, destination, text)
+    print("Email enviado")
     server.close()
